@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="TSGDataImporter">
+  <DataContextMoniker Name="/TSGDataImporterDataContext" />
+  <nestedChildShapes>
+    <classShape Id="9c771f4c-aa6f-4656-bd87-6aea82fcd34d" absoluteBounds="0.5, 0.5, 2.375, 3.6939111328124996">
+      <DataClassMoniker Name="/TSGDataImporterDataContext/ImportFile" />
+      <nestedChildShapes>
+        <elementListCompartment Id="53db8a6a-ebc7-4ca0-8545-baa86bc3581d" absoluteBounds="0.515, 0.96, 2.3449999999999998, 3.1339111328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fd285ce3-934f-46ee-9a41-595de969e660" absoluteBounds="6.375, 0.5, 2, 3.1170068359375">
+      <DataClassMoniker Name="/TSGDataImporterDataContext/ImportFileData" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c4a2bf10-1e2f-48ff-ad70-d248028f6e73" absoluteBounds="6.39, 0.96, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="97303ab6-668d-4848-b4bd-661fda18703b" absoluteBounds="3.625, 2.75, 2, 1.9631982421875">
+      <DataClassMoniker Name="/TSGDataImporterDataContext/ImportFileColumn" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0b846271-96d8-4273-97b2-5d5a4f460b9f" absoluteBounds="3.6399999999999997, 3.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="dcac5f6d-44ce-46e3-9ad7-81e9e016f86d" absoluteBounds="3.625, 0.5, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/TSGDataImporterDataContext/ImportFileTab" />
+      <nestedChildShapes>
+        <elementListCompartment Id="cc93fafe-5c8a-4510-9536-6702be1eaf81" absoluteBounds="3.64, 0.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.625 : 1.38544840494792); (6.375 : 1.38544840494792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/TSGDataImporterDataContext/ImportFileTab/ImportFileTab_ImportFileData" />
+      <nodes>
+        <classShapeMoniker Id="dcac5f6d-44ce-46e3-9ad7-81e9e016f86d" />
+        <classShapeMoniker Id="fd285ce3-934f-46ee-9a41-595de969e660" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.625 : 2.27089680989583); (4.625 : 2.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/TSGDataImporterDataContext/ImportFileTab/ImportFileTab_ImportFileColumn" />
+      <nodes>
+        <classShapeMoniker Id="dcac5f6d-44ce-46e3-9ad7-81e9e016f86d" />
+        <classShapeMoniker Id="97303ab6-668d-4848-b4bd-661fda18703b" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.875 : 1.38544840494792); (3.625 : 1.38544840494792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/TSGDataImporterDataContext/ImportFile/ImportFile_ImportFileTab" />
+      <nodes>
+        <classShapeMoniker Id="9c771f4c-aa6f-4656-bd87-6aea82fcd34d" />
+        <classShapeMoniker Id="dcac5f6d-44ce-46e3-9ad7-81e9e016f86d" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

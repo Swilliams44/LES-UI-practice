@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="TSGProductionQATEST" Class="TSGDataImporterDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=shgqadb1;Initial Catalog=TSGProduction;Persist Security Info=True;User ID=tsguser;Password=P@$$w0rd" SettingsObjectName="LESDataImporter.My.MySettings" SettingsPropertyName="TSGProductionQATESTConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.ImportFile" Member="ImportFiles">
+    <Type Name="ImportFile">
+      <Column Name="ImportFileID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FileName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="FilePath" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="CompanyID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DealID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TemplateID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IsOriginalData" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsActualData" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ExcelToDataSetCompletedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DataTransformCompletedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ValidationCompletedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DatabaseCompletedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DataToLoansCompletedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="ImportFile_ImportFileTab" Member="ImportFileTabs" ThisKey="ImportFileID" OtherKey="ImportFileID" Type="ImportFileTab" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ImportFileData" Member="ImportFileDatas">
+    <Type Name="ImportFileData">
+      <Column Name="ImportFileDataID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ImportFileID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="ImportFileTabID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RowKeyName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="RowIndex" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ColumnIndex" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LoanID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FieldSetID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FieldDataID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CellValue" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="CellValueLoanReady" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="IsValid" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="ImportFileTab_ImportFileData" Member="ImportFileTab" ThisKey="ImportFileTabID" OtherKey="ImportFileTabID" Type="ImportFileTab" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ImportFileColumn" Member="ImportFileColumns">
+    <Type Name="ImportFileColumn">
+      <Column Name="ImportFileColumnID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ImportFileID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="ImportFileTabID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ColumnName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ColumnIndex" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsKeyColumn" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="ImportFileTab_ImportFileColumn" Member="ImportFileTab" ThisKey="ImportFileTabID" OtherKey="ImportFileTabID" Type="ImportFileTab" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ImportFileTab" Member="ImportFileTabs">
+    <Type Name="ImportFileTab">
+      <Column Name="ImportFileTabID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ImportFileID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="TabName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TabXML" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="TabSortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="ImportFileTab_ImportFileData" Member="ImportFileDatas" ThisKey="ImportFileTabID" OtherKey="ImportFileTabID" Type="ImportFileData" />
+      <Association Name="ImportFileTab_ImportFileColumn" Member="ImportFileColumns" ThisKey="ImportFileTabID" OtherKey="ImportFileTabID" Type="ImportFileColumn" />
+      <Association Name="ImportFile_ImportFileTab" Member="ImportFile" ThisKey="ImportFileID" OtherKey="ImportFileID" Type="ImportFile" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.InsertImportFileDataFromXML" Method="InsertImportFileDataFromXML">
+    <Parameter Name="ImportXML" Parameter="importXML" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.SaveLoanDataExceptionsSimple" Method="SaveLoanDataExceptionsSimple">
+    <Parameter Name="DealID" Parameter="dealID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.SaveLoanDataFromImportFileDataOriginal" Method="SaveLoanDataFromImportFileDataOriginal">
+    <Parameter Name="DealID" Parameter="dealID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ImportFileID" Parameter="importFileID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="ImportFileTabID" Parameter="importFileTabID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="LoanNoColumnIndex" Parameter="loanNoColumnIndex" Type="System.Int32" DbType="Int" />
+    <Parameter Name="UserID" Parameter="userID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DueDateColumnIndex" Parameter="dueDateColumnIndex" Type="System.Int32" DbType="Int" />
+    <Parameter Name="BorrowerNameColumnIndex" Parameter="borrowerNameColumnIndex" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.SaveLoanDataFromImportFileDataActual" Method="SaveLoanDataFromImportFileDataActual">
+    <Parameter Name="DealID" Parameter="dealID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ImportFileID" Parameter="importFileID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="ImportFileTabID" Parameter="importFileTabID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="LoanNoColumnIndex" Parameter="loanNoColumnIndex" Type="System.Int32" DbType="Int" />
+    <Parameter Name="UserID" Parameter="userID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>
