@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 # Constants (set to your environment)
-BASE_URL = "https://your-app-url.com"
+BASE_URL = "https://LES-SPW-Git-Practice.com"
 USERNAME = "clientuser"
 PASSWORD = "password"
 DOWNLOAD_DIR = "/tmp/downloads"
